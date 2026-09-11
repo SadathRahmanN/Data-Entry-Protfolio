@@ -350,8 +350,8 @@
         <span class="tag">data validation</span>
       </div>
       <div class="cta-row">
-        <a class="btn primary" href="#">Download workbook</a>
-        <a class="btn ghost" href="#">View write-up on GitHub</a>
+        <a class="btn primary" href="https://raw.githubusercontent.com/SadathRahmanN/Data-Entry-Protfolio/main/MS%20Excel%20Projects/Aura%20P%26L%20Report/AURA_Sales_Tracker_Portfolio.xlsx">Download workbook</a>
+        <a class="btn ghost" href="https://github.com/SadathRahmanN/Data-Entry-Protfolio/tree/main/MS%20Excel%20Projects/Aura%20P%26L%20Report">View write-up on GitHub</a>
       </div>
 
       <div class="findings">
@@ -372,10 +372,25 @@
   </section>
 
   <footer>
-    <span>Last updated: [update date]</span>
+    <span>Last updated: <span id="last-updated">…</span></span>
     <span>Available for data entry / data processing roles</span>
   </footer>
 
 </div>
+
+<script>
+  fetch('https://api.github.com/repos/SadathRahmanN/Data-Entry-Protfolio/commits?path=index.html&per_page=1')
+    .then(res => res.json())
+    .then(data => {
+      const dateStr = data[0].commit.author.date;
+      const formatted = new Date(dateStr).toLocaleDateString('en-GB', {
+        day: 'numeric', month: 'long', year: 'numeric'
+      });
+      document.getElementById('last-updated').textContent = formatted;
+    })
+    .catch(() => {
+      document.getElementById('last-updated').textContent = 'recently';
+    });
+</script>
 </body>
 </html>
